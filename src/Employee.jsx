@@ -1,11 +1,11 @@
 import React from "react";
 
 const Employee = (props) => {
-    const {firstName, lastName, age} = props;
+    const {id, firstName, lastName, age} = props;
 
     return (
         <div>
-            <p>Employee {firstName} {' '} {lastName} of age {age}</p>
+            <p>{`${id}. ${firstName} ${lastName} (${age})`}</p>
         </div>
     );
 }
