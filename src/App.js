@@ -41,6 +41,7 @@ function App() {
         <h4>Name: {firstName} {lastName}</h4>
         <h4>Age: {age}</h4>
         <h4>Contact: {phone} ({alias})</h4>
+        <h4>Email: {email}</h4>
         <h4>Address: {street}, {city}, {name} ({countryId})</h4>
       </header>
     </div>
