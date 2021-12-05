@@ -30,9 +30,8 @@ function App() {
       <header className="App-header">
       {
         employees.map((employee) => {
-          const {id, firstName, lastName, age} = employee
           return(
-            <Employee key={id} id={id} firstName={firstName} lastName={lastName} age={age} />
+            <Employee key={employee.id} {...employee} />
           )
         })
       }
