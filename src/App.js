@@ -3,6 +3,7 @@ import './App.css';
 import Counter from './Counter';
 import Employee from './Employee';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import TodoList from './TodoList';
 
 const employees = [
@@ -28,8 +29,11 @@ const employees = [
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const count = useSelector((state) => state.counter.count);
   console.log(employees)
   const firstEmployee = employees[0];
+  const voters = ['Amara Ekwunife', 'Chika Chikeluba', 'Ebuka Ogbodo']
   return (
     <div className="App">
       <header className="App-header">
@@ -43,8 +47,12 @@ function App() {
             {
               <Employee key={firstEmployee.id} {...firstEmployee} />
             }
-            <Counter />
-            <TodoList />
+            <h1>{`Total Votes = ${count}`}</h1>
+            {
+              voters.map((voter) => 
+                <Counter name={voter} />
+              )
+            }
           </div>
           
         ) : (
