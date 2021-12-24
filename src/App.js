@@ -2,51 +2,34 @@ import logo from './logo.svg';
 import './App.css';
 import Counter from './Counter';
 import Employee from './Employee';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import TodoList from './TodoList';
-
-const employees = [
-  {
-    id: '1',
-    firstName: 'Ikenna',
-    lastName: 'Odoh',
-    age: '20'
-  },
-  {
-    id: '2',
-    firstName: 'UG',
-    lastName: 'Odoh',
-    age: '18'
-  },
-  {
-    id: '3',
-    firstName: 'TC',
-    lastName: 'Odoh',
-    age: '16'
-  },
-]
+import { getUser } from './redux/ducks/user';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch])
+
+  const user = useSelector((state) => state.user.user);
+  console.log(user)
 
   const count = useSelector((state) => state.counter.count);
-  console.log(employees)
-  const firstEmployee = employees[0];
   const voters = ['Amara Ekwunife', 'Chika Chikeluba', 'Ebuka Ogbodo']
   return (
     <div className="App">
       <header className="App-header">
-      <h1>Welcome</h1>
+      {user && <h1>Welcome { user.firstName } </h1>}
       <button onClick={() => setLoggedIn(!loggedIn)}>
         {loggedIn ? 'Logout' : 'Login'}
       </button>
       {
         loggedIn ? (
           <div>
-            {
-              <Employee key={firstEmployee.id} {...firstEmployee} />
-            }
             <h1>{`Total Votes = ${count}`}</h1>
             {
               voters.map((voter) => 
